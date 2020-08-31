@@ -45,7 +45,7 @@
         </div>
         <div class="modal-body">
         <form  action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data" >
-        <span  class="mr-2 d-none d-lg-inline text-gray-600 small" style="margin-left:10px;">
+        <span  class="mr-2 d-none d-lg-inline text-gray-600 small" style="margin-left:10px;font-size:22px;font-weight:bold;">
           {{ Auth::user()->name }} {{ Auth::user()->last_name }} </span>
             <span style="float:left;">
             @if(file_exists(storage_path('app/public/' . config('chatify.user_avatar.folder') . '/' . Auth::user()->avatar)))  

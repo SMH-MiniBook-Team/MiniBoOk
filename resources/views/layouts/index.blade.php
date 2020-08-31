@@ -274,7 +274,7 @@
       </span>
       <span style="float:left;margin-top:1%;margin-left:2%;">
       @if(file_exists(storage_path('app/public/' . config('chatify.user_avatar.folder') . '/' . Auth::user()->avatar)))  
-              <img style="margin-left: -12px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .$publication->user->avatar )}}" width="55" height="55"  alt="avatar">
+              <img style="margin-left: 0px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .$publication->user->avatar )}}" width="55" height="55"  alt="avatar">
               @else
               <img style="margin-right: 5px;" class="img-profile rounded-circle" src="{{ asset('/uploads/avatars/avatar.png') }}"width="50" alt="avatar"style="width:32px; height:32px; position:absolute; top:35px; margin-top:10px; left:20px; border-radius:50%">
                @endif 
@@ -645,7 +645,7 @@
                   margin-right:8px;
                   border-radius:18px;
                   padding-top:5px;
-                  margin-left: 10px;
+                  margin-left: 14px;
                   padding:left:15px;
                   overflow: hidden;
                   overflow-wrap: break-word;
@@ -663,7 +663,7 @@
             </span>
             <span style="float:left;">
             @if(file_exists(storage_path('app/public/' . config('chatify.user_avatar.folder') . '/' . Auth::user()->avatar)))  
-              <img style="margin-left: -12px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .Auth::user()->avatar )}}" width="55" height="55"  alt="avatar">
+              <img style="margin-left: 7px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .Auth::user()->avatar )}}" width="55" height="55"  alt="avatar">
               @else
               <img style="margin-right: 5px;" class="img-profile rounded-circle" src="{{ asset('/uploads/avatars/avatar.png') }}"width="50" alt="avatar"style="width:32px; height:32px; position:absolute; top:35px; margin-top:10px; left:20px; border-radius:50%">
                @endif 

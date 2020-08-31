@@ -20,7 +20,13 @@
         "laravel/tinker": "^2.0",
         
         "laravel/ui": "^2.2",
-        "laravolt/avatar": "^3.2"
+        "laravolt/avatar": "^3.2",
+
+        "nesbot/carbon": "^2.36",
+        "munafio/chatify": "^1.0",
+        "pusher/pusher-php-server": "^3.4@dev"
+
+
     },
     "require-dev": {
         "facade/ignition": "^2.0",
