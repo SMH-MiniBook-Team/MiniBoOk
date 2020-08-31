@@ -37,4 +37,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    protected $appends = ['avatar_url'];
+    public function getAvatarUrlAttribute()
+    {
+        return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
+    }
+
+
+
+    public function publications() 
+    {
+       // return $this->hasMany(Publication::class);
+       return $this->hasMany('App\Publication');
+    }
 }

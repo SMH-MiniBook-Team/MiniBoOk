@@ -19,10 +19,37 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/home', [
+ 'uses' => 'PublicationController@index',
+ 'as' => 'home',
+ 'middlware' => 'auth'
+]);
 
 
-Route::get('/home', function() {
-    return view('home');
-});
-    
-   
+/* =========================== CONCERNING PUBLICATIONS =========================================================*/
+
+
+
+Route::resource('publications','PublicationController');
+
+/*Route::post('/createpublication', [
+    'uses' => 'PublicationController@store',
+    'as' => 'publications.store',
+    'middlware' => 'auth'
+
+]);*/
+
+Route::get('/delete-publication/{publication_id}',[
+    'uses' => 'PublicationController@destroy',
+    'as' => 'publications-destroy',
+    'middlware' => 'auth'
+]);
+
+Route::post('/share-publication/{publication_id}',[
+    'uses' => 'PublicationController@share',
+    'as' => 'post.share',
+    'middlware' => 'auth'
+]);
+
+
+/* ==============================================================================================================*/
