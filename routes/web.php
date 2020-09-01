@@ -26,7 +26,12 @@ Route::get('/home', [
 ]);
 
 
-/* =========================== CONCERNING PUBLICATIONS =========================================================*/
+
+
+
+
+
+
 
 
 
@@ -52,4 +57,75 @@ Route::post('/share-publication/{publication_id}',[
 ]);
 
 
-/* ==============================================================================================================*/
+
+
+
+
+
+
+Route::post('/comments/{publication}', 'CommentsController@store')->name('comments.store'); 
+Route::get('/show/{id}', 'CommentsController@showPost')->name('publications.show');
+
+
+
+
+
+
+
+Auth::routes();
+
+Route::get('/messanger', [
+    'uses' => 'MessageController@index',
+    'as' => 'message',
+    'middlware' => 'auth'
+   ]);
+   Route::get('/message/{id}', 'MessageController@getMessage')->name('message');
+   Route::post('message', 'MessageController@sendMessage');
+
+
+
+
+
+
+
+
+
+
+/*Search*/ 
+Route::get('/search', 'SearchController@getResults')->name('search.results');
+
+/*User profile*/
+Route::get('/user{id}', 'ProfileController@getProfile')->name('profile.index');
+
+/*Friends*/
+Route::group([
+    'middleware' => 'auth'
+  ], function() {
+      Route::get('/friends', 'FriendController@getIndex')->name('friends.index');
+  });
+
+  Route::group([
+    'middleware' => 'auth'
+  ], function() {
+      Route::get('/friends/add/{id}', 'FriendController@getAdd')->name('friends.add');
+  });
+
+  Route::group([
+    'middleware' => 'auth'
+  ], function() {
+      Route::get('/friends/accept{id}', 'FriendController@getAccept')->name('friends.accept');
+  });
+
+  Route::group([
+    'middleware' => 'auth'
+  ], function() {
+      Route::post('/friends/delete/{id}', 'FriendController@postDelete')->name('friends.delete');
+  });
+
+
+
+
+
+
+
+
