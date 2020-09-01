@@ -35,4 +35,23 @@ class CommentsController extends Controller
 
         return view('publications.show' , ['publication' => $publication]);
     }
+
+
+
+
+
+    public function storeCommentReply(Comment $comment)
+    {
+        request()->validate([
+            'replyComment' => 'required|min:3' // on veut au mnimum 3 caractere
+        ]);
+
+        $commentReply = new Comment();
+        $commentReply->body = request('replyComment');
+        $commentReply->user_id = auth()->user()->id; // pour récuperer Id de user
+
+        $comment->comments()->save($commentReply);
+
+        return back();
+    }
 }

@@ -57,7 +57,9 @@ Route::post('/share-publication/{publication_id}',[
 ]);
 
 
-
+/*=== new things add */
+Route::post('/commentReply/{comment}', 'CommentsController@storeCommentReply')->name('comments.storeReply');
+/*====== */
 
 
 
@@ -65,6 +67,7 @@ Route::post('/share-publication/{publication_id}',[
 
 Route::post('/comments/{publication}', 'CommentsController@store')->name('comments.store'); 
 Route::get('/show/{id}', 'CommentsController@showPost')->name('publications.show');
+
 
 
 

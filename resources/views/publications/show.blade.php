@@ -46,7 +46,17 @@
     list-style-type: none;
     margin-top:25px;
 } 
+
 </style>
+@section('extra-js')
+<script>
+    function toggleReplyComment(id)
+    {
+        let element = document.grtElementByid('replyComment-' + id); //au niveau de JS on utilise  + pour concatiner
+        element.classList.toggle('d-none'); // quand on clic sur button;si le contenue exist on le retire si n'esiste pas on l'affiche
+    }
+</script>
+@endsection
 <div class="container">
 
 <div id="middlebox">
@@ -120,8 +130,7 @@
                     3 Likes
              <i class="fa fa-comment" aria-hidden="true"
                  style="font-size: 8px; margin-left:263px;"></i>
-                     5 Comments
-
+                     {{ $publication->comments->count() }} Comments
             <i class="fa fa-share" aria-hidden="true"
                   style="font-size: 8px; margin-left:4px;"></i>
                      2 Shares
@@ -379,37 +388,14 @@
                     <!--END MODAL SHARE -->
 
 </div>
-                        <!-- COncerning Commentaires -->
+            <br><br>            <!-- COncerning Commentaires -->
     <div>
 
 <div class="commentaires" style="height:auto;background-color:white;width:100%;margin-bottom:10px;">
  
  <!-- Si un comment st vide : -->
- @if ( ($publication->comments->count() > 0) && ($publication->comments->count() < 2 ) ) 
- @foreach($publication->comments as $comment)
 
-
- <img style="margin-left: 9px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .$comment->user->avatar )}}" width="55" height="55" alt="avatar">         
- <div style="
- background-color:#f1f5f0;
- boorder:none;
- border-radius:12px;
- width: fit-content;
- height: fit-content;
- margin-top: -55px;
- margin-bottom: 40px;
- margin-left: 70px;">
- <strong style="margin-left:7px;margin-top:-50px; width: fit-content;"> {{ $comment->user->name }} {{ $comment->user->last_name }} &nbsp;&nbsp;</strong>
-  <p style="margin-left: 9px;"> {{ $comment->body }}</p>
-  </div>
-  <div style="margin-top:-10px;padding-bottom: 20px;">
-  <a href="#" style="margin-right: 420px;font-size: 12px;"> Like . </a> 
-  <a href="#" style="margin-right: 380px;font-size: 12px;"> Reply . </a> 
-  <a href="#" style="margin-right: 285px;font-size: 12px;" > {{ $comment->created_at->diffForHumans() }}</a>
-   </div>
-  @endforeach
-
- @elseif (($publication->comments->count() == 0))
+ @if (($publication->comments->count() == 0))
  <a class="dropdown-item text-center small text-gray-500" href="#" style="margin-top:5px;margin-bottom:3px;">No Comment for this post, Be The first one ! </a>
  @else 
 
@@ -427,15 +413,95 @@
  margin-top: -55px;
  margin-bottom: 40px;
  margin-left: 70px;">
- <strong style="margin-left:7px;margin-top:-50px; width: fit-content;font-size:12px;"> {{ $comment->user->name }} {{ $comment->user->last_name }} &nbsp;&nbsp; </strong>
+<strong style="margin-left:7px;margin-top:-50px; width: fit-content;font-size:12px;"> {{ $comment->user->name }} {{ $comment->user->last_name }} &nbsp;&nbsp; </strong>
   <p style="margin-left: 9px;"> {{ $comment->body }}</p>
   </div>
   <div style="margin-top:-10px;padding-bottom: 20px;">
   <a href="#" style="margin-right: 420px;font-size: 12px;"> Like . </a> 
-  <a href="#" style="margin-right: 380px;font-size: 12px;"> Reply . </a> 
-  <a href="{{ route('publications.show' , $publication) }}" style="margin-right: 285px;font-size: 12px;" > {{ $comment->created_at->diffForHumans() }}</a>
-   </div>
+  @if ($comment->comments->count() == 0)
+ <a href="#" style="margin-right: 380px;font-size: 12px;" onclick="toggleReplyComment({{ $comment->id }})"> Reply .</a> 
+ <a href="#" style="margin-right: 285px;font-size: 12px;" > {{ $comment->created_at->diffForHumans() }}</a>
+
+  @else
+<a href="#" style="margin-right: 300px;font-size: 12px;" onclick="toggleReplyComment({{ $comment->id }})"> Reply (   + {{ $comment->comments->count() }} Replies  ) .</a> 
+<a href="#" style="margin-right: 205px;font-size: 12px;" > {{ $comment->created_at->diffForHumans() }}</a>
+
+@endif
+  <div id="reply" style="margin-left:45px;" > 
+  @foreach($comment->comments as $Commentreply)
+
+<img style="margin-left: 9px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .$Commentreply->user->avatar )}}" width="55" height="55" alt="avatar">         
+    <div style="
+background-color:#f1f5f0;
+boorder:none !important;
+border-radius:12px;
+width: fit-content;
+
+box-sizing: inherit;
+margin-top: -55px;
+margin-bottom: 40px;
+margin-left: 70px;">
+<strong style="margin-left:7px;margin-top:-50px; width: fit-content;font-size:12px;"> {{ $Commentreply->user->name }} {{ $Commentreply->user->last_name }} &nbsp;&nbsp; </strong>
+<p style="margin-left: 9px;"> {{ $Commentreply->body }}</p>
+</div>
+<div style="margin-top:-10px;padding-bottom: 20px;">
+<a href="#" style="margin-right: 360px;font-size: 12px;"> Like . </a> 
+<a href="#" style="margin-right: 320px;font-size: 12px;" > Reply . </a> 
+<a href="#" style="margin-right: 230px;font-size: 12px;" > {{ $Commentreply->created_at->diffForHumans() }}</a>
+
+@endforeach
+
   
+     <form id="form"  action="{{ route('comments.storeReply', $comment) }}" method="POST" >
+                        @csrf
+                        <span style="
+                    background-color: white;
+                    ">
+                            <textarea id="textareaId" 
+                            style="
+         
+                       
+         background-color: white;
+         margin-top:0%;
+         width: 66%;
+         float: inherit;
+         margin-left: 13px;
+         /* margin-right: 2px; */
+         border-radius:18px;
+         padding-top:5px;
+         /* margin-left: 90px; */
+         padding-left:15px;
+         overflow: hidden;
+         overflow-wrap: break-word;
+         
+                        " name="replyComment" placeholder="Reply to this comment..."></textarea>
+                            <button type=submit style="
+                                border: none;
+                                border-radius: 10px;
+                                background-color: #b2c7aa;
+                                float: right;
+                                margin-top: 8px;
+                                margin-right: 7px;
+                                padding: 8px;
+                            "> <i class="fas fa-comment" style="color:white;"></i> </button>
+                        </span>
+                        <span style="float:left;">
+                        <img style="margin-left: 10px;margin-top:-2px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .Auth::user()->avatar )}}" width="55" height="55"  alt="avatar">
+
+                        </span>
+                        
+  </form>      
+
+
+</div>
+</div>
+  
+                
+       
+
+
+
+
   @endforeach
   
  @endif
@@ -474,7 +540,7 @@ background-color: white;
            "> <i class="fas fa-comment" style="color:white;"></i> </button>
      </span>
      <span style="float:left;">
-     <img style="margin-left: 10px;margin-top:-10px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .Auth::user()->avatar )}}" width="55" height="55"  alt="avatar">
+     <img style="margin-left: 8px;margin-top:-10px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .Auth::user()->avatar )}}" width="55" height="55"  alt="avatar">
 
      </span>
     
