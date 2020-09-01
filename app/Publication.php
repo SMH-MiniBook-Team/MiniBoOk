@@ -16,16 +16,22 @@ class Publication extends Model
     }
 
 
-    public function comments() 
-    {
-       // return $this->hasMany(Publication::class);
-       return $this->hasMany('App\Comment');
-    }
-
     public function count()
     {
         $count = DB::select("select comments.publication_id ,count(*) as Total from comments group by comments.publication_id"); 
         return $count;
     }
-  
+
+
+    /*public function comments() 
+    {
+       // return $this->hasMany(Publication::class);
+       return $this->hasMany('App\Comment');
+    } */
+
+    public function comments() 
+    {
+       // return $this->hasMany(Publication::class);
+       return $this->morphMany('App\Comment' , 'publication')->latest();
+    }
 }

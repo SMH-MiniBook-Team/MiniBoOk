@@ -650,7 +650,7 @@
          </div>
          <div style="margin-top:-10px;padding-bottom: 20px;">
          <a href="#" style="margin-right: 420px;font-size: 12px;"> Like . </a> 
-         <a href="#" style="margin-right: 380px;font-size: 12px;"> Reply . </a> 
+         <a href="{{ route('publications.show' , $publication) }}" style="margin-right: 380px;font-size: 12px;"> Reply . </a> 
          <a href="#" style="margin-right: 310px;font-size: 12px;" > {{ $comment->created_at->diffForHumans() }}</a>
           </div>
          @endforeach

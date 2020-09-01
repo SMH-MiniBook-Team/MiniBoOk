@@ -14,10 +14,16 @@ class Comment extends Model
     }
 
 
+   
     
     public function publication() {
         return $this->belongsTo('App\Publication');
     }
 
+    public function comments()
+    {
+        return $this->morphMany('App\Comment' , 'publication')->latest();
+        //latest : c'est pour recuperer les reponses le plus recents 
+    }
     
 }
