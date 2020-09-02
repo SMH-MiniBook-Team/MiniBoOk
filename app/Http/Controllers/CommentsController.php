@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Publication;
 use App\Comment;
+use App\Notifications\NewCommentPosted;
 use Illuminate\Http\Request;
 use DB;
 
@@ -26,7 +27,12 @@ class CommentsController extends Controller
         $comment->publication_id = $publication->id; // pour récuperer Id de la publication où on veut commenter 
         $publication->comments()->save($comment);
 
-        return back();
+        $publication->user->notify(new NewCommentPosted($publication , auth()->user()));
+
+        return redirect()->route('publications.show' , $publication);
+
+
+        //return back();
 
     }
     public function showPost($id)
