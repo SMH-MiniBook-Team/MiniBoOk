@@ -57,17 +57,14 @@ Route::post('/share-publication/{publication_id}',[
 ]);
 
 
-/*=== new things add */
-Route::post('/commentReply/{comment}', 'CommentsController@storeCommentReply')->name('comments.storeReply');
-/*====== */
 
 
 
-
+Route::get('showFromNotification/{publication}/{notification}' , 'PublicationController@showFromNotification')->name('publication.showFromNotification');
 
 Route::post('/comments/{publication}', 'CommentsController@store')->name('comments.store'); 
 Route::get('/show/{id}', 'CommentsController@showPost')->name('publications.show');
-
+Route::post('/commentReply/{comment}', 'CommentsController@storeCommentReply')->name('comments.storeReply');
 
 
 

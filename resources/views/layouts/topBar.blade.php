@@ -190,8 +190,8 @@
         </div>
       </li>
       
+     
       
-
       <!-- Nav Item - Alerts -->
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -199,7 +199,7 @@
             color:#b2c7aa;
           "></i>
           <!-- Counter - Alerts -->
-          <span class="badge badge-danger badge-counter">3+</span>
+          <span class="badge badge-danger badge-counter">{{ auth()->user()->unreadNotifications->count() }}</span>
         </a>
         <!-- Dropdown - Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -213,13 +213,36 @@
            Notification
           </h6>
         
-         
-          
-          <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-        </div>
+       
+          @if (Auth::user()->unreadNotifications)
+          <a class="dropdown-item text-center small text-gray-500" href="#">
+          @foreach(Auth::user()->unreadNotifications as $notification)
+
+        
+
+           <a href="{{ route('publications.show' , $notification->data['publication_id']) }}" class="dropdown-item">
+
+                        
+          <span  class="mr-2 d-none d-lg-inline text-black-600 small" style="margin-left:33px;margin-top:1%;  font-weight:bold; color:black">
+              <strong>  {{ $notification->data['name']}} {{ $notification->data['last_name']}}</strong> has posted a comment to a publication 
+            
+          </span>
+          <span style="float:left;margin-top:1%;margin-left:2%;">
+          <img style="margin-right: px;margin-left: -25px;margin-top: -30px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' . $notification->data['avatar'] )}}" width="45" height="45" alt="avatar"
+        >
+    
+          </span>
+
+
+                    @endforeach
+          </a>
+          @endif
+         </div>
       </li>
 
        
+
+      
 
       <div class="topbar-divider d-none d-sm-block"></div>
       <!-- Nav Item - User Information -->
@@ -267,6 +290,7 @@
             Logout
           </a>
         </div>
+
       </li>
 
     </ul>

@@ -171,4 +171,11 @@ class PublicationController extends Controller
         return redirect()->route('home')
                         ->with('success','Publication shared successfully');
     }
+
+    public function showFromNotification(Publication $publication , DatabaseNotification $notification)
+    {
+        $notification->markAsRead(); //apres la leture de notification->reat_at dans data base ne reste pas null
+        return view('publications.show',['publication' => $publication]);
+    }
+
 }
