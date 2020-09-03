@@ -83,7 +83,7 @@
               background-color:white;
             }
             #middlebox .publication{
-              margin-top:7%;
+              margin-top:25%;
               width:100%;
               /*height:350px;*/
               height:auto;
@@ -294,13 +294,13 @@
         <!-- Dropdown - Plus -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="PlusDropdown" id="editing">
                 <br>
-                @if( Auth::user() != $publication->user)
+                @if ( Auth::user()->id != $publication->user->id)
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#" style="float:left;width:95%;height:10%;margin-top:-12px;margin-left:3px;padding-top:3px;padding-bottom:3px;">
                 <i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size: 13px;"></i>
                   Report the post
                 </a><br>
                 @endif
-                @if( Auth::user() == $publication->user)
+                @if ( Auth::user()->id == $publication->user->id)
 
                 <a class="dropdown-item" id="change" href="javascript:;" data-toggle="modal" data-mycontent="{{$publication->content}}" data-myimage="{{asset('uploads/postimage/' . $publication->image)}}" data-myvideo="{{asset('uploads/postvideos/' . $publication->video) }}" onclick="editData({{$publication->id}})"  data-target="#editmodal" style="float:left;width:95%;margin-top:-12px;margin-left:3px;">
                 <i class="fa fa-pencil" aria-hidden="true" style="font-size: 13px;"></i>
@@ -342,7 +342,7 @@
                     3 Likes
              <i class="fa fa-comment" aria-hidden="true"
                  style="font-size: 8px; margin-left:263px;"></i>
-                5 Comments
+                {{$publication->comments->count()}} Comments
 
             <i class="fa fa-share" aria-hidden="true"
                   style="font-size: 8px; margin-left:4px;"></i>

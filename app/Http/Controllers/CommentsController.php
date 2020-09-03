@@ -29,7 +29,7 @@ class CommentsController extends Controller
 
         $publication->user->notify(new NewCommentPosted($publication , auth()->user()));
 
-        return redirect()->route('publications.show' , $publication);
+        return back();
 
 
         //return back();

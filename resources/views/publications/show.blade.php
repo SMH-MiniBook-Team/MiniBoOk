@@ -39,7 +39,7 @@
               height:auto;
             }
             #middlebox .publication .react{
-              margin-top:-10px;
+              margin-top:30px;
               height:auto;
             }
             #no-bullets {
@@ -154,7 +154,11 @@
                        Share
             </a>
 
-
+            <br>
+            <hr class="sidebar-divider" style="
+                  margin-top: -12px;
+                  padding-top: 13px;
+              ">
 
 
 
@@ -388,7 +392,7 @@
                     <!--END MODAL SHARE -->
 
 </div>
-            <br><br>            <!-- COncerning Commentaires -->
+                   <!-- COncerning Commentaires -->
     <div>
 
 <div class="commentaires" style="height:auto;background-color:white;width:100%;margin-bottom:10px;">
@@ -511,9 +515,7 @@ margin-left: 70px;">
 <div style="background-color:white;height: 55%;">
 <form id="form"  action="{{ route('comments.store' , $publication) }}" method="POST" style="height:140%; background-color:white;">
      @csrf
-     <span style="
-background-color: white;
-">
+     <span >
            <textarea id="textareaId" style="
          
          background-color: white;
@@ -523,7 +525,7 @@ background-color: white;
            margin-right:8px;
            border-radius:18px;
            padding-top:5px;
-           margin-left: 10px;
+           margin-left: 72px;
            padding:left:15px;
            overflow: hidden;
            overflow-wrap: break-word;
@@ -540,7 +542,7 @@ background-color: white;
            "> <i class="fas fa-comment" style="color:white;"></i> </button>
      </span>
      <span style="float:left;">
-     <img style="margin-left: 8px;margin-top:-10px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .Auth::user()->avatar )}}" width="55" height="55"  alt="avatar">
+     <img style="margin-left: 5px;margin-top:-53px;" class="img-profile rounded-circle" src="{{asset('storage/' . config('chatify.user_avatar.folder') . '/' .Auth::user()->avatar )}}" width="55" height="55"  alt="avatar">
 
      </span>
     

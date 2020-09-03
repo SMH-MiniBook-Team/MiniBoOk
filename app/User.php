@@ -49,6 +49,23 @@ class User extends Authenticatable
     {
         return Storage::url('avatars/'.$this->id.'/'.$this->avatar);
     }
+
+
+
+    
+    public function publications() 
+    {
+       // return $this->hasMany(Publication::class);
+       return $this->hasMany('App\Publication');
+    }
+
+
+    public function comments() 
+    {
+       // return $this->hasMany(Publication::class);
+       return $this->hasMany('App\Comment');
+    }
+
 /* ===================== Concerning Friends Request And Users Search ========================*/
 
 
