@@ -91,6 +91,10 @@ Route::get('/messanger', [
 
 
 
+/* ===================== Concerning Friends Request And Users Search ========================*/
+
+
+
 /*Search*/ 
 Route::get('/search', 'SearchController@getResults')->name('search.results');
 
@@ -121,6 +125,11 @@ Route::group([
   ], function() {
       Route::post('/friends/delete/{id}', 'FriendController@postDelete')->name('friends.delete');
   });
+
+
+/* ===================== ============================================= ========================*/
+
+
 
 
 
