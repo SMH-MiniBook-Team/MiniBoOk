@@ -17,7 +17,7 @@ https://www.youtube.com/watch?v=eq4kzKiokEA&feature=youtu.be
 * In your command line (cmd) go to this file that u created : cd  nom_file  <br>
 * Then do this command : git clone https://github.com/SMH-MiniBook-Team/MiniBoOk.git    <br>
 * Now the project it is on your local !   <br>
-* composer update    <br>
+* composer install    <br>
 * cp .env.example .env   <br>
 * Create database and modify .env with your DB name and Mail & Pusher credentials.   <br>
 * php artisan migrate   <br> 
