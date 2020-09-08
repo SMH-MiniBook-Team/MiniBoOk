@@ -20,6 +20,7 @@ https://www.youtube.com/watch?v=eq4kzKiokEA&feature=youtu.be
 * composer install    <br>
 * cp .env.example .env   <br>
 * Create database and modify .env with your DB name and Mail & Pusher credentials.   <br>
+* php artisan passport:install <br>
 * php artisan migrate   <br> 
 * php artisan key:generate   <br>
 * npm install && npm run dev   <br>
