@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=eq4kzKiokEA&feature=youtu.be
 <h3>Quick Start</h3>
 * Firstly create a new file in your local  ( name it as u like) <br>
 * In your command line (cmd) go to this file that u created : cd  nom_file  <br>
-* Then do this command : git clone https://github.com/SMH-MiniBook-Team/MiniBoOk.git    <br<
+* Then do this command : git clone https://github.com/SMH-MiniBook-Team/MiniBoOk.git    <br>
 * Now the project it is on your local !   <br>
 * composer update    <br>
 * cp .env.example .env   <br>
